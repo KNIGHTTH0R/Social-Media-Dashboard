@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Twitter;
+use App\GitHub;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -18,7 +19,9 @@ class DashboardController extends Controller
     		$latestTweet = Twitter::index($screen_name);
     	}
 
-    	return view('dashboard', compact('latestTweet'));
+        $latestCommit = GitHub::getLatestCommit();
+
+    	return view('dashboard', compact('latestTweet', 'latestCommit'));
     }
 
     public function twitter(){
@@ -28,7 +31,7 @@ class DashboardController extends Controller
     public function addTwitterAccount(Request $request){
 
     	$request->validate([
-        	'screen_name' => 'required'
+            'screen_name' => 'required'
     	]);
 
     	$account = Twitter::addAccount($request->input());
@@ -37,5 +40,24 @@ class DashboardController extends Controller
     	}else{
     		return redirect()->back();
     	}
+    }
+
+    public function github(){
+        return view('dashboard/github/index');
+    }
+
+    public function addGitHubAccount(Request $request){
+
+        $request->validate([
+            'github_username' => 'required',
+            'github_access_token' => 'required'
+        ]);
+
+        $account = GitHub::addAccount($request->input());
+        if($account){
+            return redirect()->home();
+        }else{
+            return redirect()->back()->withErrors(['badcredentials' => 'Your login details are incorrect']);
+        }
     }
 }

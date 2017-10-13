@@ -20,6 +20,19 @@
 			<h2>Latest Instagram:</h2>
 			
 		</div>
+
+		<div class="col-md-4">
+			<h2>Latest Commit:</h2>
+			@if(isset($latestCommit))
+			<a href="{{ $latestCommit['commit_url'] }}" target="_blank">
+			"{{ $latestCommit['commit'] }}" - {{ $latestCommit['author'] }}
+
+			{{ $latestCommit['repo'] }}
+			@else
+				<a href="/github">Connect GitHub Account</a>
+			@endif
+			</a>
+		</div>
 	</div>
 
 </div>

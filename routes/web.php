@@ -21,3 +21,6 @@ Route::get('/logout', 'HomeController@logout');
 
 Route::get('/twitter', 'DashboardController@twitter');
 Route::post('/twitter', 'DashboardController@addTwitterAccount');
+
+Route::get('/github', 'DashboardController@github');
+Route::post('/github', 'DashboardController@addGitHubAccount');
