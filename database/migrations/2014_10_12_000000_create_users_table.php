@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('twitter_screen_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
