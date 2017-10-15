@@ -24,3 +24,6 @@ Route::post('/twitter', 'DashboardController@addTwitterAccount');
 
 Route::get('/github', 'DashboardController@github');
 Route::post('/github', 'DashboardController@addGitHubAccount');
+
+Route::get('/instagram', 'DashboardController@instagram');
+Route::get('/instagram-response', 'DashboardController@instagramResponse');

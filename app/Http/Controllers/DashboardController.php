@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Twitter;
 use App\GitHub;
+use App\Instagram;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -21,7 +22,11 @@ class DashboardController extends Controller
 
         $latestCommit = GitHub::getLatestCommit();
 
-    	return view('dashboard', compact('latestTweet', 'latestCommit'));
+        if(Auth::user()->instagram_access_token){
+            $latestInstagram = Instagram::getLatestInstagram();
+        }
+
+    	return view('dashboard', compact('latestTweet', 'latestCommit', 'latestInstagram'));
     }
 
     public function twitter(){
@@ -60,4 +65,17 @@ class DashboardController extends Controller
             return redirect()->back()->withErrors(['badcredentials' => 'Your login details are incorrect']);
         }
     }
+
+    public function instagram(){
+        return view('dashboard/instagram/index');
+    }
+
+
+    public function instagramResponse(Request $request){
+
+        $instagram = Instagram::addInstagramAccount($request->input());
+        return redirect()->home();
+        
+    }
+
 }

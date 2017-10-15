@@ -5,7 +5,7 @@
 	<h1>Dashboard</h1>
 </div>
 
-<div class="container">
+<div class="container dashboard-container">
 	<div class="row">
 		<div class="col-md-4">
 			<h2>Latest Tweet:</h2>
@@ -18,7 +18,13 @@
 
 		<div class="col-md-4">
 			<h2>Latest Instagram:</h2>
-			
+			@if(isset($latestInstagram))
+				<img src="{{ $latestInstagram['img_url'] }}" alt="" style="width: 100%;">
+				{{ $latestInstagram['caption'] }}
+			@else
+				<a href="/instagram">Connect Instagram Account</a>
+			@endif
+
 		</div>
 
 		<div class="col-md-4">
