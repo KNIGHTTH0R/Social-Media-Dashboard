@@ -1,11 +1,14 @@
 @extends('layouts.master')
-
+<div class="home-container">
 @section('content')
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 ml-auto mr-auto">
-			<h1>Login</h1>
-			<form action="/login" method="POST">
+			<h1>Social Media Dashboard</h1>
+			<p>Display your latest social media activity on your dashboard.</p>
+
+			<h2>Login</h2>
+			<form action="/login" method="POST" class="home-form">
 				{{ csrf_field() }}
 
 				<div class="form-group">
@@ -25,3 +28,4 @@
 	</div>
 </div>
 @endsection
+</div>
